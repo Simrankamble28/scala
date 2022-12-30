@@ -1,0 +1,32 @@
+ Write a program to merge two sets and calculate product and average of all elements of the Set
+
+
+->import scala.collection.immutable._
+import scala.collection.immutable.HashSet
+import scala.math.Numeric
+object set3
+{
+def main(args:Array[String])
+{
+val s1=Set(1,2,3,4)
+val s2=Set(5,6,7,8)
+val s=s1 union s2
+println(" "+s)
+val n=s.sum
+val m=n/s.size
+println(" Sum is:"+n)
+println(" Avg is:"+m)
+}
+}
+
+
+output:-
+
+
+C:\Users\SAI\scala_samples\sbt_proj>scalac set3.scala
+C:\Users\SAI\scala_samples\sbt_proj>scala set3
+ HashSet(5, 1, 6, 2, 7, 3, 8, 4)
+ Sum is:36
+ Avg is:4
+
+

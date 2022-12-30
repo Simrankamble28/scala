@@ -1,0 +1,49 @@
+4. Create array of strings and read a string from user. Display all the elements of array containing given string.
+->import scala.io.StdIn._
+import java.lang.String;
+object StringArray
+{
+def main(args:Array[String])
+{
+var a=Array.ofDim[String](10)
+println("Enter the Array Limit")
+var n=readInt()
+for(i<-0 to n-1)
+{
+println("Enter the string")
+a(i)=readLine()
+}
+for(i<-0 to n-1)
+{
+println(" "+a(i))
+}
+println("Enter the string for search & count occurrences")
+var str1=readLine()
+var c=0
+for(i<-0 to n-1)
+{
+if(a(i).equals(str1))
+c=c+1
+}
+println("Total no of string is"+c)
+}
+}
+output:-
+C:\Users\SAI\scala_samples\sbt_proj>scalac StringArray.scala
+C:\Users\SAI\scala_samples\sbt_proj>scala StringArray
+Enter the Array Limit
+3
+Enter the string
+aaa
+Enter the string
+bbb
+Enter the string
+aaa
+ aaa
+ bbb
+ aaa
+Enter the string for search & count occurrences
+aaa
+Total no of string is2
+
+

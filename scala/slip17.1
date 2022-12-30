@@ -1,0 +1,71 @@
+Create abstract class Shape with abstract functions volume() and display(). Extend two classes Cube and Cylinder from it. Calculate volume of each and display it.
+
+
+ 
+->import scala.io.StdIn._
+abstract class shape1
+{
+  def volume()
+  def display()
+  var a=0.0
+var h=0.0
+var r=0.0
+var v=0.0
+}
+ class cube extends shape1
+{
+  def volume()
+  {
+     println("Enter the value of a=")
+     a=readFloat()
+   v=a*a*a
+  }
+ def display()
+{
+   println("volume of cube="+v)
+}
+}
+class cylinder extends shape1
+{
+  def volume()
+  {
+     println("Enter the radius and height=")
+     r=readFloat()
+     h=readFloat()
+   v=3.14*r*r*h
+  }
+ def display()
+{
+   println("volume of cylinder="+v)
+}
+}
+ object shape
+{
+   def main(args:Array[String])
+  {
+    var ob1=new cube()
+    ob1.volume()
+     ob1.display()
+    var ob2=new cylinder()
+    ob2.volume()
+     ob2.display()
+ }
+}
+
+
+
+Output:
+
+
+Enter the value of a=
+3
+volume of cube=27.0
+Enter the radius and height=
+2
+3
+volume of cylinder=37.68
+
+
+
+
+

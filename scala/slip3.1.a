@@ -1,0 +1,47 @@
+write a program to read five random number and check that random no are perfect no or not.
+
+->import scala.io.StdIn._
+import scala.util.control._
+object perfect
+{
+def main(args:Array[String])
+{
+var r=scala.util.Random
+var j=1
+while(j<=5)
+{
+var n=r.nextInt(20)
+println("random no is"+n)
+var i=1
+var sum=0
+while(i<n)
+{
+if(n%i==0)
+{
+sum=sum+i
+}
+i=i+1
+}
+if(sum==n)
+ println(""+n+"no is perfect")
+else
+ println(""+n+"no is  not perfect")
+  j=j+1
+  }
+}
+}
+
+
+
+
+Output:
+random no is10
+10no is  not perfect
+random no is5
+5no is  not perfect
+random no is3
+3no is  not perfect
+random no is4
+4no is  not perfect
+random no is18
+18no is  not perfect

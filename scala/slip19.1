@@ -1,0 +1,27 @@
+Write a program to create list with 10 members using function 3n2+4n+6 
+
+
+->import java.io._
+import scala.collection.mutable.ListBuffer
+object List5
+ {
+def main(args: Array[String])
+ {
+var x=List(1)
+for (i <- 1 to 10)
+ {
+x=x:::Accept(i)::Nil	
+ }
+println(x) 
+ }
+def Accept(n:Int) : Int =
+{
+println("Round : "+n)
+return ((3*n*n)+(4*n)+6)    
+}
+}
+
+
+
+Output:
+Round : 1

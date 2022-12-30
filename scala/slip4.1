@@ -1,0 +1,90 @@
+Create abstract class Order (id, description). Derive two classes PurchaseOrder&amp; SalesOrder with members Vendor and Customer. Create object of each PurchaseOrder and SalesOrder. Display the details of each account. 
+
+
+
+->import scala.io.StdIn._
+abstract class Order1(val id:Int,val des:String)
+{
+  var id1:Int=id
+  var des1:String=des
+  def accept()
+  def display()
+} 
+  class salesorder(val vendor:String,val cust:String) extends Order1(1,"aaa")
+{
+  var v:String=vendor
+  var c:String=cust
+  def accept()
+  {
+     println("Enter the vendor name:")
+     v=readLine()
+     println("Enter the customer name:")
+     c=readLine()
+  }
+  def display()
+  {
+   println("***********Details*********")
+    println("Id="+id)
+    println("Des="+des)
+    println("Vendor name="+v)
+    println("Customer name="+c)  
+  }
+}
+ class purchesorder(val vendor:String,val cust:String) extends Order1(2,"bbb")
+{
+  var v:String=vendor
+  var c:String=cust
+  def accept()
+  {
+     println("Enter the vendor name:")
+     v=readLine()
+     println("Enter the customer name:")
+     c=readLine()
+  }
+  def display()
+  {
+   println("***********Details*********")
+    println("Id="+id)
+    println("Des="+des)
+    println("Vendor name="+v)
+    println("Customer name="+c)  
+  }
+}
+object order
+{
+   def main(args:Array[String])
+    {
+       var ob1=new salesorder("","")
+       ob1.accept()
+       ob1.display()
+       
+       var ob2=new purchesorder("","")
+       ob2.accept()
+       ob2.display()
+    }
+}
+
+
+
+Output:
+
+
+Enter the vendor name:
+kanchan
+Enter the customer name:
+aa
+***********Details*********
+Id=1
+Des=aaa
+Vendor name=kanchan
+Customer name=aa
+Enter the vendor name:
+rr
+Enter the customer name:
+sai
+***********Details*********
+Id=2
+Des=bbb
+Vendor name=rr
+Customer name=sai
+
