@@ -1,0 +1,54 @@
+﻿db.T_industry.insertMany([{"_id":"1","Name":"vennaworld","rate":"A","Package":"50000"},
+                          {"_id":"2","Name":"KESARIworld","rate":"B","Package":"40000"},
+						  {"_id":"4","Name":"SHIPLAworld","rate":"C","Package":"30000"},
+                          {"_id":"3","Name":"KITAworldTOUR","rate":"D","Package":"40000"},
+						  {"_id":"5","Name":"SHONAworldTOUR","rate":"A","Package":"70000"},
+						  {"_id":"6","Name":"YOGAworldTOUR","rate":"B","Package":"60000"},
+						  {"_id":"7","Name":"HINAworldTOUR","rate":"B","Package":"80000"},
+						  {"_id":"9","Name":"SHINAworldTOUR","rate":"B","Package":"80000"},
+						{"_id":"10","Name":"AYUSHworldTOUR","rate":"A","Package":"60000"}])
+						  
+						  
+						  
+db.Customer.insert([{cid:11,name:"john",toure:{source:"mumbai",destination:[{name:"goa",name:"norvy",name:"mumbai"}]},expences:150000},
+                     {cid:12,name:"anvi",toure:{source:"mumbai",destination:{name:"Shillong"},expences:120000},
+					 {cid:13,name:"nikita",toure:{source:"pune",destination:[{name:"korea",name:"norvy",name:"mumbai"}]},expences:110000},
+					 {cid:14,name:"neha",toure:{source:"USA",destination:[{name:"Utti",name:"Malesia",name:"Kolkata"}]},expences:200000},
+					 {cid:15,name:"shivnya",toure:{source:"shirdi",destination:[{name:"USA",name:"Breli",name:"Kshmir"}]},expences:550000},
+					 {cid:16,name:"hitan",toure:{source:"kanda",destination:[{name:"goa",name:"norvy",name:"mumbai"}]},expences:150000},
+					 {cid:18,name:"miya",toure:{source:"mumbai",destination:[{name:"nagaland",name:"norvy",name:"pune"}]},expences:150000},
+					 {cid:19,name:"kartiki",toure:{source:"shrirampur",destination:[{name:"kanda",name:"norvy",name:"china"}]},expences:250000},
+					 {cid:20,name:"diya",toure:{source:"nashik",destination:[{name:"lonavla",name:"matheran",name:"pajganni"}]},expences:50000}])
+					 
+a. List the details of packages provided by “Veena World”.
+db.T_industry.find({"Name":"vennaworld"})
+{ "_id" : "1", "Name" : "vennaworld", "rate" : "A", "Package" : "50000" }
+
+b. List the highest rated tourism industry.
+
+ db.T_industry.find({"rate":"A"})
+{ "_id" : "1", "Name" : "vennaworld", "rate" : "A", "Package" : "50000" }
+{"_id":"5","Name":"SHONAworldTOUR","rate":"A","Package":"70000"}
+{"_id":"10","Name":"AYUSHworldTOUR","rate":"A","Package":"60000"}
+
+c. List all the details of expenses made by John on his first 3 trips. Also
+display the total expenses. [5]
+
+db.customers.find(name:"john")
+{cid:11,name:"john",toure:{source:"mumbai",destination:[{name:"goa",name:"norvy",name:"mumbai"}]},expences:150000}
+
+
+d.List the names of the customers who went on a tour to Shillong.
+
+db.Tourist.find({"tour":"Shillong"})
+{cid:12,name:"anvi",toure:{source:"mumbai",destination:[{name:"Shillong"}]},expences:120000}
+
+
+
+
+
+
+
+
+
+

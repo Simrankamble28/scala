@@ -1,0 +1,104 @@
+Slip No 17
+FOR MOBILE Collection
+
+>use MobileShop        //for creating DB in MOngoDB
+
+>db.createCollection("mobile")	//for creating Collection in MOngoDB
+
+//entering rows in mobile collection
+
+>db.mobile.insertMany ( [
+{"mobileName" : "samsung A2",
+"brandName" : "samsung","ram" : 3,"rom" : 			32,"rating" : [{"firstName" : "pranav",
+ "lastName" : "honmode",
+ "rating" : 4
+				},{"firstName" : "anannya","lastName" : "kulkarni",
+"rating" : 5
+}]}
+,
+	
+			{ "mobileName" : "vivo xs","brandName" : "vivo",
+"ram" : 8,"rom" : 64,"rating" 			: [{"firstName" : "vihan","lastName" : "rajan",
+"rating" : 3}, {"firstName" : 				"rohit","lastName" : "deshmukh",
+"rating" : 4
+}
+]
+},
+			
+			{"mobileName" : "mi y1","brandName" : "redmi","ram" : 4,"rom" : 32,"rating" : 			[{
+"firstName" : "kunal","lastName" : "shetty","rating" : 4.4},{"firstName" : 			"kavya","lastName" : "bakshi",
+"rating" : 5}
+]
+}
+			])
+
+>db.createCollection("customer")	//for creating Collection in MOngoDB
+
+>db.customer.insertMany ([{
+"customerName" : {"firstName" : "anannya","lastName" : 				"kulkarni"},"productBought" : {"mobileName" : "vivo xs","brandName" : 				"vivo"
+}
+},
+ 			{
+"customerName" : {
+"firstName" : "pranav",
+ "lastName" : "honmode"},
+			"productBought" : {"mobileName" : "samsung A2","brandName" : "samsung"}
+}
+			 ])
+
+Q4:a => db.mobile.aggregate([{$match: {$and: [{ram: 3}, {rom: 32}]}}, {$group: {_id: {MobileName: "$mobileName"}}}]).pretty();
+
+Result: 
+{ "_id" : { "MobileName" : "samsung A2" } }
+
+Q4:b => db.customer.aggregate([{$match: {"productBought.mobileName": "samsung A2"}}, {$group: {_id: {CustomerName: "$customerName"}}}])
+
+Result:
+{ "_id" : { "CustomerName" : { "firstName" : "kunal", "lastName" : "shetty" } } }
+{ "_id" : { "CustomerName" : { "firstName" : "kavya", "lastName" : "bakshi" } } }
+{ "_id" : { "CustomerName" : { "firstName" : "pranav", "lastName" : "honmode" } } }
+
+Q4:c => db.mobile.aggregate([{}, {}$group: {_id: {brandName: "$brandName"}}]), 
+             > db.mobile.aggregate([{$sort: {"rating.rating": -1}}, {$group: {_id: {BrandName: "$brandName"}}}, {$limit: 1}]).pretty()
+
+Result:
+{ "_id" : { "BrandName" : "samsung" } }
+
+Q4:d => db.customer.aggregate([{$match: {"productBought.mobileName": "samsung A2"}}, {$sort: {"customerName.firstName": -1}}]).pretty();
+
+Result:
+{
+        "_id" : ObjectId("609403f447e69b26e71e319b"),
+        "customerName" : {
+                "firstName" : "pranav",
+                "lastName" : "honmode"
+        },
+        "productBought" : {
+                "mobileName" : "samsung A2",
+                "brandName" : "samsung"
+        }
+}
+{
+        "_id" : ObjectId("6094044f47e69b26e71e319e"),
+        "customerName" : {
+                "firstName" : "kunal",
+                "lastName" : "shetty"
+        },
+        "productBought" : {
+                "mobileName" : "samsung A2",
+                "brandName" : "samsung"
+        }
+}
+{
+        "_id" : ObjectId("6094040f47e69b26e71e319c"),
+        "customerName" : {
+                "firstName" : "kavya",
+                "lastName" : "bakshi"
+        },
+        "productBought" : {
+                "mobileName" : "samsung A2",
+                "brandName" : "samsung"
+        }
+}
+
+********************SLIP NO: 10 END***********************

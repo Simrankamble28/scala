@@ -1,0 +1,115 @@
+Slip No 7
+
+
+
+Q1.Modelthe following Hospitalinformation system asa documentdatabase.Consider
+hospitals in and around Pune.Each hospital may have one or more specializations like Pediatric,
+Gynaec,Orthopaedic,etc.A person can recommend/provide review for ahospital.A doctor can
+be associated with one or more hospitals.
+****OUTPUT****
+
+>usehospitalInformationSystem
+
+Q2.Assumeappropriateattributesandcollectionsasperthequery
+
+****OUTPUT****
+>db.createCollection("hospital")
+>db.createCollection("doctor")
+>db.createCollection("person")
+
+Q3.Insert at least 10 documents in each collection.
+
+***Collection hospital***
+
+>db.hospital.insertMany([{hospitalId: 11, hospitalName: "city
+			hospital",isMyltispeciality:"true",speciality: [{name:"Pediatric"},			{name:"Orthopaedic"}],rating:
+			[{ratingBy:{firstName:"john",lastName:"cena", givenRating:4}}],visits:					{visitedBy:"Dr peterson",onDay:"monday"}},
+
+			{hospitalId:12,hospitalName:"jehangir hospital", 							isMyltispeciality:"false",speciality:[{name:"Orthopaedic"}], rating:			[{ratingBy:{firstName:"kevin",lastName:"watson", givenRating:4.4}}],visits:
+			{visitedBy:"Drhamedani",onDay:"saturday"}},
+
+			{hospitalId:13,hospitalName:"dan Herits", 			isMyltispeciality:"true",speciality:[{name:
+			"Pediatric"},{name:"Gynaec"}],rating:[{ratingBy:			{firstName:"sachin",lastName:"shetty",givenRating:
+			5}}],visits:{visitedBy:"Drkale",onDay:"wednesday"}}, 
+
+			{hospitalId:14,hospitalName:"hrhospital",
+			isMyltispeciality:"false",speciality:[{name:"heartspecialist"}],rating:			[{ratingBy:{firstName:"sonali",
+			lastName:"naik",givenRating:5.4}}],visits:			{visitedBy:"Drmane",onDay:"saturday"}},
+
+			{hospitalId:15,hospitalName:"debit Heri", 			isMyltispeciality:"true",speciality:[{name:
+			"Pediatric"},{name:"Gynaec"}],rating:[{ratingBy:			{firstName:"sarita",lastName:"shelke",givenRating:
+			5}}],visits:{visitedBy:"Drkk",onDay:"monday"}},
+	
+			{hospitalId:16,hospitalName:"jehangirhospital",
+			isMyltispeciality:"false",speciality:[{name: "Orthopaedic"}],rating:			[{ratingBy:{firstName:"kevin",
+			lastName:"watson",givenRating:4.4}}],visits:			{visitedBy:"Drhamedani",onDay:"saturday"}},
+
+
+			{hospitalId:17,hospitalName:"dan Herits", 			isMyltispeciality:"true",speciality:[{name:
+			"Pediatric"},{name:"Gynaec"}],rating:[{ratingBy:			{firstName:"sachin",lastName:"shetty",givenRating:
+			5}}],visits:{visitedBy:"Drkale",onDay:"wednesday"}}]);
+
+
+***Collectiondoctor***
+db.doctors.insertMany([{doctorId:201,doctorName: "Dr perterson",specialization:"Pediatric",
+			experiance:"10 years"},
+			{doctorId:202,doctorName:"Dr hamedani",
+			specialization:"Orthopaedic",experiance:"20 years"},
+			{doctorId:203,doctorName:"Dr perterson",specialization:"Pediatric", 			experiance:"1 years"},
+			{doctorId:204,doctorName:"Dr 			hamedani",specialization:"Orthopaedic",experiance:"20 years"},						{doctorId:205,doctorName:"Dr
+			perterson", 
+			specialization:"Pediatric", experiance:"10 years"},			{doctorId:206,doctorName:"Dr
+			hamedani",specialization:"Orthopaedic",experiance:"20years"}])
+***Collectionperson***
+db.persons.insertMany([{personId: 201, personName: {firstName: "pranav", lastName:
+			"honmode"},visitedHospitals:[{hospitalName:"cityhospital"},			{hospitalName:"centralhospital"}]},
+			{personId:202,personName:			{firstName:"kevin",lastName:"watson"},visitedHospitals:
+			[{hospitalName:"centralhospital"}]},
+			{personId:203,personName:			{firstName:"anannya",lastName:"kulkarni"},visitedHospitals:
+			[{hospitalName:"cityhospital"},{hospitalName:"danherits"}]},
+			{personId:204,personName:			{firstName:"sachin",lastName:"shetty"},visitedHospitals:
+			[{hospitalName:"centralhospital"}]},
+			{personId: 205, personName: {firstName: "john", lastName: "cena"}, 			visitedHospitals:
+			[{hospitalName:"danheritshospital"},{hospitalName:"centralhospital"}]},
+			]);	
+
+Q4.AnswerthefollowingQueries
+a.List the names of hospitals with pediatricspecialization.
+> db.hospital.aggregate([{$match:{"speciality.name":"Pediatric"}},{$group:{_id:
+{hospitalName:"$hospitalName"}}}]);
+*****OUTPUT*****
+{"_id":{"hospitalName":"danHerits"}}
+{"_id":{"hospitalName":"cityhospital"}}
+
+b.List the Names of doctors who are visiting jahehangir Hospital on monday
+>db.hospital.aggregate([{$match:{"visits.onDay":"monday"}},{$group:{_id:{doctorName:
+"$visits.visitedBy"}}}]);
+*****OUTPUT*****
+{"_id":{"doctorName":"Drpeterson"}}
+
+c.List the names of hospitals which are multispecialty hospitals where Dr.Kalevisits.
+>db.hospital.aggregate([{$match:{$and:[{isMyltispeciality:"true"},{"visits.visitedBy":"Dr
+peterson"}]}},{$group:{_id:{hospitalName:"$hospitalName"}}}]);
+*****OUTPUT*****
+{"_id":{"hospitalName":"cityhospital"}}
+
+d.List the names of people who have given a ratingof(>=3)for jaehangirHospital
+>db.hospital.aggregate([{$match:{$and:[{hospitalName: "central
+hospital"},{"rating.ratingBy.givenRating": {$gte:3}}]}},{$lookup:{from:"persons",localField:
+"rating.ratingBy.firstName",foreignField: "personName.firstName",as:"result"}},{$project:
+{firstName:"$result.personName.firstName"}}]).pretty();
+*****OUTPUT*****
+{
+"_id":
+ObjectId("6094b8644ea36d73fe88a447")
+"firstName":[
+"anjali"
+]
+}
+{
+"_id":
+ObjectId("6094b8644ea36d73fe88a449")
+"firstName":[
+"sonali"
+]
+}

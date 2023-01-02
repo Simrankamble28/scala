@@ -1,0 +1,27 @@
+Slip No 20
+
+Q1: => Labels -> Hospital, People 
+                        Hospital -> hname, specialization, visitedBy, rating, ratedBy, onDay.
+	         People -> Name, rating, ratedHospitalName.
+
+Q2: => CREATE (h1: hospital {hname: 'aa hospital', specialization: 'orthopedic', rating: 3, ratedBy: 'ajay Kumar', visitedBy: 'dr shanjay', onDay: 'monday'}) RETURN h1,
+          CREATE (h2: hospital {hname: 'bb hospital', specialization: 'orthopedic', rating: 4, ratedBy: 'prashant', visitedBy: 'dr kahnna', onDay: 'tuesday'}) RETURN h2,
+          CREATE (h3: hospital {hname: 'cc hospital', specialization: 'pediatric', rating: 4, ratedBy: 'anuj', visitedBy: 'dr shanjay', onDay: 'monday'}) RETURN h3,
+
+          CREATE (p1: people {name: 'ajay kumar', ratedHospitalName: 'aa hospital'}) RETURN p1,
+          CREATE (p2: people {name: 'prashant', ratedHospitalName: 'bb hospital'}) RETURN p2,
+          CREATE (p3: people {name: 'anuj', ratedHospitalName: 'aa hospital'}) RETURN p3,
+
+Q3:a => MATCH (n:Hospital) WHERE n.specialization = 'pediatric' RETURN n.hname
+
+	Result: "aa hospital", "bb hospital"
+
+Q3:b => MATCH (n:Hospital) WHERE n.hname = 'aa hospital' AND n.onDay = 'monday' RETURN n.vitedBy
+
+	Result: "dr sanjay"
+
+Q3:d => MATCH (n:Hospital) WHERE n.rating <=3 AND n.hname = 'aa hospital' RETURN n.ratingBy
+
+	Result: "dr sanjay"
+
+**********************SLIP NO: 17 END***********************
