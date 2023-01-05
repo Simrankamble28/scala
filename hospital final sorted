@@ -1,0 +1,78 @@
+ >use hospitalInformationSystem
+ 
+ 
+>db.createCollection("hospital")
+>db.createCollection("doctor")
+>db.createCollection("person")
+
+
+
+> db.hospital.insertdb.hospitalInformationSystem.insert([       {hospitalId: 11,         hospitalName: "city hopital",         isMultispeciality: "true",         speciality: [{name: "Pediatric"}, {name:"Orthopedic"}],         rating: [{ratingBy:{firstName: "John", lastName: "Cena", givenRating:4}}],visits: {visitedBy: "Dr. peterson", onDay :"monday" }}])
+
+
+
+> db.doctors.insertdb.hospitalInformationSystem.insert([       {doctorId: "201",doctorName: "Dr perterson",specialization: "Pediatric",experiance: "10 years"}])
+
+
+
+> db.persons.insertdb.hospitalInformationSystem.insert([{personId: "201", personName: {firstName: "pranav", lastName:"honmode"},visitedHospitals: [{hospitalName:"cityhospital"},{hospitalName:"centralhospital"}]}])
+
+
+
+Q4.AnswerthefollowingQueries
+
+a.List the names of hospitals with pediatricspecialization.
+> db.hospital.aggregate([{$match:{"speciality.name":"Pediatric"}},{$group:{_id:
+{hospitalName:"$hospitalName"}}}]);
+
+
+*****OUTPUT*****
+{"_id":{"hospitalName":"danHerits"}}
+{"_id":{"hospitalName":"cityhospital"}}
+
+
+b.List the Names of doctors who are visiting jahehangir Hospital on monday
+>db.hospital.aggregate([{$match:{"visits.onDay":"monday"}},{$group:{_id:{doctorName:
+"$visits.visitedBy"}}}]);
+
+
+*****OUTPUT*****
+{"_id":{"doctorName":"Drpeterson"}}
+
+
+
+c.List the names of hospitals which are multispecialty hospitals where Dr.Kalevisits.
+>db.hospital.aggregate([{$match:{$and:[{isMyltispeciality:"true"},{"visits.visitedBy":"Dr
+peterson"}]}},{$group:{_id:{hospitalName:"$hospitalName"}}}]);
+
+
+*****OUTPUT*****
+{"_id":{"hospitalName":"cityhospital"}}
+
+
+
+d.List the names of people who have given a ratingof(>=3)for jaehangirHospital
+>db.hospital.aggregate([{$match:{$and:[{hospitalName: "central
+hospital"},{"rating.ratingBy.givenRating": {$gte:3}}]}},{$lookup:{from:"persons",localField:
+"rating.ratingBy.firstName",foreignField: "personName.firstName",as:"result"}},{$project:
+{firstName:"$result.personName.firstName"}}]).pretty();
+
+
+*****OUTPUT*****
+{
+"_id":
+ObjectId("6094b8644ea36d73fe88a447")
+"firstName":[
+"anjali"
+]
+}
+{
+"_id":
+ObjectId("6094b8644ea36d73fe88a449")
+"firstName":[
+"sonali"
+]
+}
+
+
+
